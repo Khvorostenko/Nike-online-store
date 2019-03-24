@@ -23,7 +23,6 @@
     <v-layout row>
       <v-flex xs12 class="text-xs-center pt-5">
         <h1 color="white">Cart empty</h1>
-        <v-progress-circular :size="100" :width="5" color="white" indeterminate></v-progress-circular>
       </v-flex>
     </v-layout>
   </v-container>

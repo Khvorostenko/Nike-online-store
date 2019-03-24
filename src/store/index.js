@@ -1,14 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
-import user from './modules/user'
+
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules: {
-    user,
-  },
   state: {
     products: [],
     loading: false,
@@ -36,10 +33,11 @@ export default new Vuex.Store({
       try {
         let {
           data
-        } = await Axios.get('http://5c1fddedf3e8d200133b659d.mockapi.io/products');
+        } = await Axios.get('https://online-store-nike.firebaseio.com/products.json');
         context.commit('setProduct', data)
-      } catch (error) {
         context.commit('setLoading', true)
+      } catch (error) {
+        context.commit('setLoading', false)
       }
 
 
@@ -47,7 +45,7 @@ export default new Vuex.Store({
     saveProduct: async (context, payload) => {
       let {
         data
-      } = await Axios.post('http://5c1fddedf3e8d200133b659d.mockapi.io/products', {
+      } = await Axios.post('https://online-store-nike.firebaseio.com/products.json', {
         title: payload.title,
         description: payload.description,
         price: payload.price,

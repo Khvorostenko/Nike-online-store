@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="!loading">
+  <v-container v-if="loading">
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
         <h1 class="mb-3">Create New Product</h1>
@@ -60,24 +60,19 @@
             @click="addProduct"
             color="success"
             :disabled="!valid"
-            :loading="loading"
+            :loading="!loading"
           >Add product</v-btn>
         </v-form>
       </v-flex>
     </v-layout>
   </v-container>
-  <v-container v-else>
-    <v-layout row>
-      <v-flex xs12 class="text-xs-center">
-        <v-progress-circular :size="200" :width="10" color="white" indeterminate></v-progress-circular>
-      </v-flex>
-    </v-layout>
-  </v-container>
+<Loader v-else/>
 </template>
 
 
 
 <script>
+import Loader from '../UI/Loader'
 export default {
   data: () => ({
     valid: false,
@@ -115,6 +110,9 @@ export default {
     loading() {
       return this.$store.getters.loading;
     }
+  },
+  components:{
+    Loader,
   }
 };
 </script>

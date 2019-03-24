@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="!loading">
+  <v-container v-if="loading">
     <v-layout row wrap>
       <v-flex xs12 sm6 md4 d-inline-block v-for="(product, id) in products" :key="id">
         <v-card class="elevation-18 mb-2 pa-3 mr-2">
@@ -38,16 +38,11 @@
       </v-snackbar>
     </v-card>
   </v-container>
-  <v-container v-else>
-    <v-layout row>
-      <v-flex xs12 class="text-xs-center pt-5">
-        <v-progress-circular :size="200" :width="10" color="white" indeterminate></v-progress-circular>
-      </v-flex>
-    </v-layout>
-  </v-container>
+ <Loader v-else/>
 </template>
 
 <script>
+import Loader from '../UI/Loader'
 export default {
   data: () => ({
     show: false,
@@ -77,6 +72,9 @@ export default {
       this.snackbar = true;
       product.disable = true;
     }
+  },
+  components:{
+    Loader,
   }
 };
 </script>
