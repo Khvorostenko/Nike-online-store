@@ -8,7 +8,7 @@
           </v-list-tile-action>
 
           <v-list-tile-content>
-            <v-list-tile-title v-text="link.title"></v-list-tile-title>
+            <v-list-tile-title  v-text="link.title"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -21,17 +21,23 @@
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-title class="hidden-sm-and-down">
-        <v-btn class="menu" flat v-for="(link, i) in links" :key="i" :to="link.url">
+      <v-toolbar-title  class="hidden-sm-and-down">
+        <v-btn class="menu" round flat v-for="(link, i) in links" :key="i" :to="link.url">
           <v-icon left>{{ link.icon }}</v-icon>
           {{ link.title }}
         </v-btn>
       </v-toolbar-title>
     </v-toolbar>
     <v-content class="custom-content">
-      <router-view></router-view>
+      <transition  
+      mode="out-in" 
+      enter-active-class="animated fadeInDown slower"
+      leave-active-class="animated fadeOutUp slow"
+      >
+       <router-view></router-view>
+      </transition>
     </v-content>
-    <v-footer app fixed>
+    <v-footer app fixed color="#fffff">
       <span>&copy; Khvorostenko Bohdan</span>
     </v-footer>
   </v-app>
@@ -74,4 +80,27 @@ export default {
 h3 {
   color: green;
 }
+/* .fade-enter {}
+    
+.fade-enter-active{
+    animation: slideIn 0.5s;
+}
+.fade-enter-to{}
+
+.fade-leave {}
+ 
+.fade-leave-active{
+     animation: slideOut 0.5s;
+    } 
+.fade-leave-to {}
+
+@keyframes slideIn {
+from{transform: translateX(2000px)}
+to{transform: translateX(0px)}
+}
+    
+@keyframes slideOut {
+from {transform: translateX(0px)}
+to{transform: translateX(-2000px)}
+} */
 </style>

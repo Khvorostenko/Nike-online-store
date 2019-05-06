@@ -69,6 +69,10 @@ export default new Router({
       path:'/addProduct',
       name:'AddProduct',
       component: AddProduct
+    },
+    {
+      path:'*',
+      component:Home
     }
   ],
   mode: 'history'
