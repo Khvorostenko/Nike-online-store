@@ -10,10 +10,10 @@
               <h4>{{item.price}} $</h4>
             </div>
           </v-card-title>
-
           <v-card-actions>
-            <v-btn :to="'/product/' + item.id">To order</v-btn>
+            <v-btn  :to="'/product/' + item.id">To order</v-btn>
             <v-spacer></v-spacer>
+         <v-btn @click="delCart(item)" flat round icon><i class="material-icons">close</i></v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -33,7 +33,6 @@
 export default {
   data() {
     return {
-      cart: this.$store.state.cart,
       emptyCart: false
     };
   },
@@ -43,13 +42,26 @@ export default {
     } else {
       this.emptyCart = false;
     }
+  },
+  computed:{
+    cart(){
+      return this.$store.getters.cart
+    }
+  },
+  methods:{
+    delCart(item){
+      const cart = this.cart 
+      const cartIndex = cart.indexOf(item);
+      cart.splice(cartIndex, 1)
+      this.$store.commit('delToCart');
+    }
   }
 };
 </script>
 
 
 <style lang="css" scoped>
-h1{
+h1 {
   color: #ffffff;
 }
 </style>

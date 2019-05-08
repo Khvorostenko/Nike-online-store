@@ -11,7 +11,7 @@ export default new Vuex.Store({
     loading: false,
     error: null,
     cart: [],
-    cartCount: null,
+    cartCount: null
   },
   mutations: {
     setProduct: (state, payload) => {
@@ -26,6 +26,9 @@ export default new Vuex.Store({
     addToCart(state, product) {
       state.cart.push(product);
       state.cartCount++;
+    },
+    delToCart(state){
+      state.cartCount--
     }
   },
   actions: {
@@ -33,7 +36,7 @@ export default new Vuex.Store({
       try {
         let {
           data
-        } = await Axios.get('https://online-store-nike.firebaseio.com/products.json');
+        } = await Axios.get('https://vue-store-46b92.firebaseio.com/products.json');
         context.commit('setProduct', data)
         context.commit('setLoading', true)
       } catch (error) {
@@ -45,7 +48,7 @@ export default new Vuex.Store({
     saveProduct: async (context, payload) => {
       let {
         data
-      } = await Axios.post('https://online-store-nike.firebaseio.com/products.json', {
+      } = await Axios.post('https://vue-store-46b92.firebaseio.com/products.json', {
         title: payload.title,
         description: payload.description,
         price: payload.price,
@@ -75,6 +78,9 @@ export default new Vuex.Store({
     },
     loading: state => {
       return state.loading
+    },
+    cart: state => {
+      return state.cart
     }
   }
 })
